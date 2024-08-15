@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trabajo 3</title>
+    <style>
+        body{
+            background-color: grey;
+        }
+        canvas{
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="myCanvas" width="700" height="550"></canvas>
+    <script>
+
+    const myCanvas = document.getElementById("myCanvas");
+    const ctx = myCanvas.getContext("2d");
+    
+    ctx.fillStyle = "red";
+    ctx.fillRect(20, 20, 100, 100);
+
+    
+    ctx.fillStyle = "blue";
+    ctx.fillRect(180, 180, 100, 100);
+    
+    ctx.fillStyle = "rgba(112, 234, 51, 0.6)";
+    ctx.fillRect(260, 260, 100, 100);
+
+    ctx.strokeRect(100, 100, 100, 100)
+
+    ctx.strokeStyle = "rgba(239, 202, 17, 0.6)";
+    ctx.strokeRect(340, 340, 100, 100);
+
+    ctx.beginPath();
+    ctx.moveTo(300, 160);
+    ctx.lineTo(200, 260);
+    ctx.lineTo(600, 200);
+    ctx.closePath()
+
+    ctx.strokeStyle = "rgb(220, 23, 227)";
+    ctx.lineWidth = 2
+    ctx.fillStyle = "rgba(227, 23, 118, 0.4)";
+    ctx.fill()
+    ctx.stroke()
+
+
+    </script>
+</body>
+</html>
