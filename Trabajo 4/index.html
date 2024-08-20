@@ -90,6 +90,15 @@
    ctx.fillStyle = grd;
    ctx.fillRect(400, 530, 150, 100); 
 
+   const grd2 = ctx.createRadialGradient(450, 400, 420, 460, 300, 100);
+grd2.addColorStop(0, "white");
+grd2.addColorStop(0.5, "purple");
+grd2.addColorStop(1, "red");
+
+// Draw a filled Rectangle
+ctx.fillStyle = grd2;
+ctx.fillRect(580, 400, 150, 100);
+
     </script>
 </body>
 </html>
