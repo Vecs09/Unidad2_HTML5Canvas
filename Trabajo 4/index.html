@@ -82,6 +82,14 @@
     img.onload = function(){
     ctx.drawImage(img, 70, 500, 220, 150);
    };
+
+   const grd = ctx.createLinearGradient(400, 530, 510, 530);
+   grd.addColorStop(0, "rgb(29, 158, 156)");
+   grd.addColorStop(1, "rgb(66, 85, 246)");
+
+   ctx.fillStyle = grd;
+   ctx.fillRect(400, 530, 150, 100); 
+
     </script>
 </body>
 </html>
