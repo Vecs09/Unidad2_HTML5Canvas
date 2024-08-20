@@ -11,14 +11,16 @@
         canvas{
             background-color: white;
         }
-    </style>
+        </style>
 </head>
 <body>
-    <canvas id="myCanvas" width="700" height="550"></canvas>
+    <canvas id="myCanvas" width="800" height="650"></canvas>
+    
     <script>
-
-    const myCanvas = document.getElementById("myCanvas");
-    const ctx = myCanvas.getContext("2d");
+        
+        const myCanvas = document.getElementById("myCanvas");
+        const ctx = myCanvas.getContext("2d");
+        
 
     ctx.strokeRect(100, 100, 100, 100);
     
@@ -75,8 +77,11 @@
     ctx.fillStyle="rgba(66, 85, 246, 0.6)"
     ctx.fillText("Texto para probar el fillText", 10, 50);
 
-
-
+    const img = new Image();
+    img.src = "https://th.bing.com/th/id/OIP.fsvA0n-DQ7SOEUB72VXhgQHaEI?rs=1&pid=ImgDetMain";
+    img.onload = function(){
+    ctx.drawImage(img, 70, 500, 220, 150);
+   };
     </script>
 </body>
 </html>
