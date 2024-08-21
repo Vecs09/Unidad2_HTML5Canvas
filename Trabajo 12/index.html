@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trabajo 12</title>
+    <style>
+        body{
+            background-color: grey;
+        }
+        canvas{
+            background-color: white;
+        }
+        </style>
+</head>
+
+<body>
+    <canvas id="myCanvas" width="800" height="650"></canvas>
+
+    <script>
+        const myCanvas = document.getElementById("myCanvas");
+        const ctx = myCanvas.getContext("2d");
+        
+        document.getElementById("myCanvas").addEventListener("mousedown", function(e){
+        ctx.beginPath();
+        ctx.arc(e.x, e.y, 50, 0, 2 * Math.PI);
+        ctx.strokeStyle = "rgba(231, 95, 23,0.5)";
+        ctx.lineWidth = 2.4
+        ctx.fillStyle = "rgba(242, 28, 28, 0.5)";
+        ctx.fill();
+        ctx.stroke();
+})
+
+
+
+
+        
+
+    </script>
+</body>
+</html>
