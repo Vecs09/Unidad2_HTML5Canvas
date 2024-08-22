@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trabajo 12</title>
     <style>
-        body{
+        body {
             background-color: grey;
         }
-        canvas{
+
+        canvas {
             background-color: white;
         }
         </style>
@@ -16,12 +18,14 @@
 
 <body>
     <canvas id="myCanvas" width="800" height="650"></canvas>
-
+    
     <script>
-   const myCanvas = document.getElementById("myCanvas");
+        const myCanvas = document.getElementById("myCanvas");
         const ctx = myCanvas.getContext("2d");
         var forma = 1;
-
+        let strokeColor = getRandomColor();
+        let fillColor = getRandomColor();
+        
         function getRandomColor() {
             var trans = '0.5'; // 50% transparency
             var color = 'rgba(';
@@ -31,40 +35,55 @@
             color += trans + ')'; // add the transparency
             return color;
         }
-
-        document.getElementById("myCanvas").addEventListener("mouseover", function (e) {
-            ctx.strokeStyle = getRandomColor();
-            ctx.fillStyle = getRandomColor();
-           
+        
+        document.getElementById("myCanvas").addEventListener("mousemove", function (e) {
+            ctx.beginPath();
+            ctx.strokeStyle = "black";
+            ctx.fillStyle = "black";
+            ctx.arc(e.offsetX, e.offsetY, 5, 0, 2 * Math.PI);
+            ctx.lineWidth = 0.2
+            ctx.fill();
+            ctx.stroke();
+        })
+        
+        document.getElementById("myCanvas").addEventListener("mouseover", function () {
+            strokeColor = getRandomColor();
+            fillColor = getRandomColor();
         })
 
         document.getElementById("myCanvas").addEventListener("mousedown", function (e) {
-            if(forma == 1){
+            if (forma == 1) {
                 ctx.beginPath();
-                ctx.arc(e.x, e.y, 50, 0, 2 * Math.PI);
+                ctx.strokeStyle = strokeColor;
+                ctx.fillStyle = fillColor;
+                ctx.arc(e.offsetX, e.offsetY, 50, 0, 2 * Math.PI);
                 ctx.lineWidth = 2.4
                 ctx.fill();
                 ctx.stroke();
 
             }
-            if(forma == 2){
-                ctx.fillRect(e.x, e.y, 100, 100);
+            if (forma == 2) {
+                ctx.strokeStyle = strokeColor;
+                ctx.fillStyle = fillColor;
+                ctx.fillRect(e.offsetX, e.offsetY, 100, 100);
             }
         })
 
         document.getElementById("myCanvas").addEventListener("mouseout", function (e) {
-          if(forma == 1){
-            forma = 2;
-          }else{
-            forma = 1;
-          }
+            if (forma == 1) {
+                forma = 2;
+            } else {
+                forma = 1;
+            }
         })
 
 
 
 
-        
+
+
 
     </script>
 </body>
+
 </html>
