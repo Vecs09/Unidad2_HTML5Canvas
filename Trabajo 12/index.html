@@ -25,6 +25,7 @@
         var forma = 1;
         let strokeColor = getRandomColor();
         let fillColor = getRandomColor();
+        let isDrawing = false;
         
         function getRandomColor() {
             var trans = '0.5'; // 50% transparency
@@ -36,15 +37,30 @@
             return color;
         }
         
-        document.getElementById("myCanvas").addEventListener("mousemove", function (e) {
-            ctx.beginPath();
-            ctx.strokeStyle = "black";
-            ctx.fillStyle = "black";
-            ctx.arc(e.offsetX, e.offsetY, 5, 0, 2 * Math.PI);
-            ctx.lineWidth = 0.2
-            ctx.fill();
-            ctx.stroke();
+        document.getElementById("myCanvas").addEventListener("mouseup", function (e) {
+                isDrawing = true
+                ctx.beginPath();
+                ctx.strokeStyle = "black";
+                ctx.fillStyle = "black";
+                ctx.arc(e.offsetX, e.offsetY, 5, 0, 2 * Math.PI);
+                ctx.lineWidth = 0.2
+                ctx.fill();
+                ctx.stroke();
+            
         })
+        myCanvas.addEventListener("mouseup", function () {
+            isDrawing = false;
+        });
+
+        myCanvas.addEventListener("mousemove", function (e) {
+            if (isDrawing) {
+                ctx.beginPath();
+                ctx.arc(e.offsetX, e.offsetY, 5, 0, 2 * Math.PI);
+                ctx.fillStyle = "black";
+                ctx.fill();
+                ctx.closePath();
+            }
+        });
         
         document.getElementById("myCanvas").addEventListener("mouseover", function () {
             strokeColor = getRandomColor();
@@ -53,6 +69,7 @@
 
         document.getElementById("myCanvas").addEventListener("mousedown", function (e) {
             if (forma == 1) {
+                isDrawing = true;
                 ctx.beginPath();
                 ctx.strokeStyle = strokeColor;
                 ctx.fillStyle = fillColor;
@@ -63,6 +80,7 @@
 
             }
             if (forma == 2) {
+                isDrawing = true;
                 ctx.strokeStyle = strokeColor;
                 ctx.fillStyle = fillColor;
                 ctx.fillRect(e.offsetX, e.offsetY, 100, 100);
