@@ -13,87 +13,124 @@
         canvas {
             background-color: white;
         }
-        </style>
+    </style>
 </head>
 
 <body>
     <canvas id="myCanvas" width="800" height="650"></canvas>
-    
+
     <script>
         const myCanvas = document.getElementById("myCanvas");
         const ctx = myCanvas.getContext("2d");
         var forma = 1;
-        let strokeColor = getRandomColor();
-        let fillColor = getRandomColor();
-        let isDrawing = false;
-        
-        function getRandomColor() {
-            var trans = '0.5'; // 50% transparency
-            var color = 'rgba(';
-            for (var i = 0; i < 3; i++) {
-                color += Math.floor(Math.random() * 255) + ',';
+        // let strokeColor = getRandomColor();
+        //  let fillColor = getRandomColor();
+        //  let isDrawing = false;
+
+        var posX = 100;
+        var posY = 100;
+
+        ctx.fillStyle = "black";
+        ctx.fillRect(posX, posY, 100, 100);
+        pintar();
+
+        addEventListener("keypress", (e) => {
+            console.log(e.keyCode)
+            ctx.fillStyle = "white";
+            ctx.fillRect(posX, posY, 100, 100);
+            switch (e.keyCode) {
+                
+                case 119:
+                    posY -= 10;
+                    break;
+                case 97:
+                    posX -= 10;
+                    break;
+                case 115:
+                    posY += 10;
+                    break;
+                case 100:
+                    posX += 10;
+    
+                    break;
             }
-            color += trans + ')'; // add the transparency
-            return color;
+               
+                pintar();
+        });
+
+        function pintar() {
+            ctx.fillStyle = "black";
+            ctx.fillRect(posX, posY, 100, 100);
         }
-        
-        document.getElementById("myCanvas").addEventListener("mouseup", function (e) {
-                isDrawing = true
-                ctx.beginPath();
-                ctx.strokeStyle = "black";
-                ctx.fillStyle = "black";
-                ctx.arc(e.offsetX, e.offsetY, 5, 0, 2 * Math.PI);
-                ctx.lineWidth = 0.2
-                ctx.fill();
-                ctx.stroke();
-            
-        })
-        myCanvas.addEventListener("mouseup", function () {
-            isDrawing = false;
-        });
-
-        myCanvas.addEventListener("mousemove", function (e) {
-            if (isDrawing) {
-                ctx.beginPath();
-                ctx.arc(e.offsetX, e.offsetY, 5, 0, 2 * Math.PI);
-                ctx.fillStyle = "black";
-                ctx.fill();
-                ctx.closePath();
-            }
-        });
-        
-        document.getElementById("myCanvas").addEventListener("mouseover", function () {
-            strokeColor = getRandomColor();
-            fillColor = getRandomColor();
-        })
-
-        document.getElementById("myCanvas").addEventListener("mousedown", function (e) {
-            if (forma == 1) {
-                isDrawing = true;
-                ctx.beginPath();
-                ctx.strokeStyle = strokeColor;
-                ctx.fillStyle = fillColor;
-                ctx.arc(e.offsetX, e.offsetY, 50, 0, 2 * Math.PI);
-                ctx.lineWidth = 2.4
-                ctx.fill();
-                ctx.stroke();
-
-            }
-            if (forma == 2) {
-                isDrawing = true;
-                ctx.strokeStyle = strokeColor;
-                ctx.fillStyle = fillColor;
-                ctx.fillRect(e.offsetX, e.offsetY, 100, 100);
-            }
-        })
-
-        document.getElementById("myCanvas").addEventListener("mouseout", function (e) {
-            if (forma == 1) {
-                forma = 2;
-            } else {
-                forma = 1;
-            }
-        })
+        /*
+          function getRandomColor() {
+              var trans = '0.5'; // 50% transparency
+              var color = 'rgba(';
+              for (var i = 0; i < 3; i++) {
+                  color += Math.floor(Math.random() * 255) + ',';
+              }
+              color += trans + ')'; // add the transparency
+              return color;
+          }
+          
+          document.getElementById("myCanvas").addEventListener("mouseup", function (e) {
+                  isDrawing = true
+                  ctx.beginPath();
+                  ctx.strokeStyle = "black";
+                  ctx.fillStyle = "black";
+                  ctx.arc(e.offsetX, e.offsetY, 5, 0, 2 * Math.PI);
+                  ctx.lineWidth = 0.2
+                  ctx.fill();
+                  ctx.stroke();
+              
+          })
+          myCanvas.addEventListener("mouseup", function () {
+              isDrawing = false;
+          });
+  
+          myCanvas.addEventListener("mousemove", function (e) {
+              if (isDrawing) {
+                  ctx.beginPath();
+                  ctx.arc(e.offsetX, e.offsetY, 5, 0, 2 * Math.PI);
+                  ctx.fillStyle = "black";
+                  ctx.fill();
+                  ctx.closePath();
+              }
+          });
+          
+          document.getElementById("myCanvas").addEventListener("mouseover", function () {
+              strokeColor = getRandomColor();
+              fillColor = getRandomColor();
+          })
+  
+          document.getElementById("myCanvas").addEventListener("mousedown", function (e) {
+              if (forma == 1) {
+                  isDrawing = true;
+                  ctx.beginPath();
+                  ctx.strokeStyle = strokeColor;
+                  ctx.fillStyle = fillColor;
+                  ctx.arc(e.offsetX, e.offsetY, 50, 0, 2 * Math.PI);
+                  ctx.lineWidth = 2.4
+                  ctx.fill();
+                  ctx.stroke();
+  
+              }
+              if (forma == 2) {
+                  isDrawing = true;
+                  ctx.strokeStyle = strokeColor;
+                  ctx.fillStyle = fillColor;
+                  ctx.fillRect(e.offsetX, e.offsetY, 100, 100);
+              }
+          })
+  
+          document.getElementById("myCanvas").addEventListener("mouseout", function (e) {
+              if (forma == 1) {
+                  forma = 2;
+              } else {
+                  forma = 1;
+              }
+          })
+              */
 
 
 
