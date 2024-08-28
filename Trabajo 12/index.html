@@ -29,39 +29,49 @@
 
         var posX = 100;
         var posY = 100;
+        var direction = '';
 
         ctx.fillStyle = "black";
         ctx.fillRect(posX, posY, 100, 100);
-        pintar();
 
         addEventListener("keypress", (e) => {
             console.log(e)
-            ctx.fillStyle = "white";
-            ctx.fillRect(posX, posY, 100, 100);
+
 
             switch (e.key) {
-            //se movian los numeros tons lo cambie por la letra 
+                //se movian los numeros tons lo cambie por la letra 
                 case e.key = 'w':
-                    posY -= 10;
+                    direction = 'up'
                     break;
                 case e.key = 'a':
-                    posX -= 10;
+                    direction = 'left'
                     break;
                 case e.key = 's':
-                    posY += 10;
+                    direction = 'down'
                     break;
                 case e.key = 'd':
-                    posX += 10;
+                    direction = 'right'
+                    break;
+            }
 
+        });
+
+        function actualizar() {
+            switch (direction) {
+                case 'up':
+                    posY -= 10;
+                    break;
+                case 'left':
+                    posX -= 10;
+                    break;
+                case 'down':
+                    posY += 10;
+                    break;
+                case 'right':
+                    posX += 10;
                     break;
             }
             bordes();
-            pintar();
-        });
-
-        function pintar() {
-            ctx.fillStyle = "black";
-            ctx.fillRect(posX, posY, 100, 100);
         }
 
         function bordes() {
@@ -76,6 +86,19 @@
                 posY = -100;
             }
         }
+
+        function pintar() {
+            ctx.fillStyle = "white";
+            ctx.fillRect(0, 0, 800, 650);
+            ctx.fillStyle = "black";
+            ctx.fillRect(posX, posY, 100, 100);
+
+            actualizar();
+            requestAnimationFrame(pintar);
+        }
+        requestAnimationFrame(pintar);
+
+
         /*
           function getRandomColor() {
               var trans = '0.5'; // 50% transparency
