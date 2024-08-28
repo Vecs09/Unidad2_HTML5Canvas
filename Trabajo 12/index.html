@@ -30,6 +30,7 @@
         var posX = 100;
         var posY = 100;
         var direction = '';
+        var speed = 5;
 
         ctx.fillStyle = "black";
         ctx.fillRect(posX, posY, 100, 100);
@@ -52,6 +53,9 @@
                 case e.key = 'd':
                     direction = 'right'
                     break;
+                case e.key = 'v':
+                    speed += 2.5;          
+                     break;
             }
 
         });
@@ -59,17 +63,18 @@
         function actualizar() {
             switch (direction) {
                 case 'up':
-                    posY -= 10;
+                    posY -= speed;
                     break;
                 case 'left':
-                    posX -= 10;
+                    posX -= speed;
                     break;
                 case 'down':
-                    posY += 10;
+                    posY += speed;
                     break;
                 case 'right':
-                    posX += 10;
+                    posX += speed;
                     break;
+
             }
             bordes();
         }
@@ -90,6 +95,11 @@
         function pintar() {
             ctx.fillStyle = "white";
             ctx.fillRect(0, 0, 800, 650);
+
+            ctx.font = "50px Georgia";
+            ctx.fillStyle = "black"
+            ctx.fillText("Speed: " + speed, 510, 50);
+
             ctx.fillStyle = "black";
             ctx.fillRect(posX, posY, 100, 100);
 
@@ -97,6 +107,7 @@
             requestAnimationFrame(pintar);
         }
         requestAnimationFrame(pintar);
+
 
 
         /*
