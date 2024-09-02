@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mario Bros-</title>
+    <style>
+        body {
+            background-color: grey;
+        }
+
+        canvas {
+            background-color: rgb(162, 240, 255);
+        }
+    </style>
+</head>
+
+<body>
+
+    <canvas id="myCanvas" width="800" height="450"></canvas>
+    <script>
+        const myCanvas = document.getElementById("myCanvas");
+        const ctx = myCanvas.getContext("2d");
+
+        ctx.fillStyle = "rgb(177, 111, 59)";
+        ctx.fillRect(0, 380, 800, 90);
+
+        ctx.fillStyle = "rgb(252, 149, 89)";
+        ctx.fillRect(0, 370, 800, 15);
+
+        ctx.fillStyle = "rgba(0, 0, 0,0.8)";
+        ctx.fillRect(390, 150, 40, 220);
+
+        ctx.fillStyle = "rgb(113, 194, 255)";
+        ctx.fillRect(230, 130, 170, 240);
+        ctx.strokeRect(230, 130, 170, 240);
+
+
+        ctx.fillStyle = "rgba(0, 0, 0,0.8)";
+        ctx.fillRect(280, 220, 40, 150);
+
+        ctx.fillStyle = "rgb(255, 192, 181)";
+        ctx.fillRect(120, 200, 170, 170);
+        ctx.strokeRect(120, 200, 170, 170);
+
+
+        ctx.fillStyle = "rgb(0, 124, 0)";
+        ctx.fillRect(590, 240, 120, 130);
+        ctx.strokeRect(590, 240, 120, 130);
+
+        ctx.fillStyle = "rgb(0, 124, 0)";
+        ctx.fillRect(565, 170, 170, 70);
+        ctx.strokeRect(565, 170, 170, 70);
+
+
+        ctx.fillStyle = "rgb(255, 137, 84)";
+        ctx.fillRect(30, 60, 60, 60);
+        ctx.strokeRect(30, 60, 60, 60);
+
+
+        ctx.fillStyle = "rgb(255, 137, 84)";
+        ctx.fillRect(470, 180, 60, 60);
+        ctx.strokeRect(470, 180, 60, 60);
+
+
+        ctx.fillStyle = "rgb(255, 137, 84)";
+        ctx.fillRect(230, 1, 60, 60);
+        ctx.strokeRect(230, 1, 60, 60);
+
+        ctx.fillStyle = "rgb(255, 137, 84)";
+        ctx.fillRect(290, 1, 60, 60);
+        ctx.strokeRect(290, 1, 60, 60);
+
+        const img = new Image();
+        img.src = "https://pngimg.com/uploads/mario/mario_PNG88.png";
+        img.onload = function () {
+            ctx.drawImage(img, 450, 280, 70, 80);
+        };
+
+
+        const img1 = new Image();
+        img1.src = "https://w7.pngwing.com/pngs/751/642/png-transparent-plants-vs-zombies-garden-warfare-2-plants-vs-zombies-2-it-s-about-time-carnivorous-eating-video-game-plants-vs-zombies-garden-warfare.png";
+        img1.onload = function () {
+            ctx.drawImage(img1, 600, 70, 100, 100);
+        };
+
+    </script>
+
+</body>
+
+</html>
