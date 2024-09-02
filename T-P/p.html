@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paisaje</title>
+
+    <style>
+        body {
+            background-color: grey;
+        }
+
+        canvas {
+            background-color: rgb(83, 186, 255);
+        }
+    </style>
+</head>
+
+<body>
+
+    <canvas id="myCanvas" width="800" height="550"></canvas>
+    <script>
+        const myCanvas = document.getElementById("myCanvas");
+        const ctx = myCanvas.getContext("2d");
+
+
+        ctx.fillStyle = "rgb(135, 55, 6)";
+        ctx.fillRect(0, 500, 800, 70);
+
+        ctx.fillStyle = "rgb(39, 135, 6)";
+        ctx.fillRect(0, 490, 800, 10);
+
+        ctx.fillStyle = "rgb(255, 184, 22  )";
+        ctx.fillRect(170, 190, 400, 300);
+
+        ctx.fillStyle = "rgb(145, 67, 19   )";
+        ctx.fillRect(320, 340, 80, 150);
+
+        ctx.fillStyle = "rgb(125, 251, 240 )";
+        ctx.fillRect(200, 240, 80, 80);
+
+        ctx.fillStyle = "rgb(125, 251, 240 )";
+        ctx.fillRect(460, 240, 80, 80);
+
+        ctx.strokeRect(320, 340, 80, 150);
+
+        ctx.strokeRect(240, 280, 40, 40);
+        ctx.strokeRect(200, 280, 40, 40);
+        ctx.strokeRect(200, 240, 40, 40);
+        ctx.strokeRect(240, 240, 40, 40);
+
+
+        ctx.strokeRect(500, 280, 40, 40);
+        ctx.strokeRect(460, 280, 40, 40);
+        ctx.strokeRect(460, 240, 40, 40);
+        ctx.strokeRect(500, 240, 40, 40);
+
+
+
+        ctx.beginPath();
+        ctx.arc(390, 420, 6, 0, 2 * Math.PI);
+        ctx.strokeStyle = "rgb(242, 28, 28)";
+        ctx.lineWidth = 2.4
+        ctx.fillStyle = "rgb(242, 28, 28)";
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(170, 190);
+        ctx.lineTo(570, 190);
+        ctx.lineTo(370, 120);
+        ctx.closePath()
+
+        ctx.strokeStyle = "rgb(93, 117, 114)";
+        ctx.lineWidth = 2
+        ctx.fillStyle = "rgb(93, 117, 114)";
+        ctx.fill()
+        ctx.stroke()
+
+
+        ctx.beginPath();
+        ctx.arc(0, 0, 120, 0, 2 * Math.PI);
+        ctx.lineWidth = 2.4
+        ctx.strokeStyle = "orange";
+        ctx.fillStyle = "yellow";
+        ctx.fill();
+        ctx.closePath()
+
+        ctx.stroke();
+
+
+
+    </script>
+
+</body>
+
+</html>
