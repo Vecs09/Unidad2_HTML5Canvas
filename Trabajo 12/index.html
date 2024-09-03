@@ -27,17 +27,42 @@
         //  let fillColor = getRandomColor();
         //  let isDrawing = false;
 
+
+        class Rectangle {
+            constructor(color, h, w, x, y, speed) {
+                this.color = color;
+                this.h = h;
+                this.w = w;
+                this.x = x;
+                this.y = y;
+                this.speed = speed;
+            }
+
+            colision(otro) {
+                if (this.x < otro.x + otro.w &&
+                    this.x + this.w > otro.x &&
+                    this.y < otro.y + otro.h &&
+                    this.y + this.h > otro.y) {
+                    return true;
+                }
+                return false;
+                
+            }
+        }
+        var player = new Rectangle("red", 50, 50, 100, 100, speed);
+        var target = new Rectangle("blue", 20, 20, 50, 50, null);
+
+
+
         var posX = 100;
         var posY = 100;
         var direction = '';
         var speed = 5;
 
-        ctx.fillStyle = "black";
-        ctx.fillRect(posX, posY, 100, 100);
+        ctx.fillStyle = player.color;
+        ctx.fillRect(player.x, player.y, player.h, player.w);
 
         addEventListener("keypress", (e) => {
-            console.log(e)
-
 
             switch (e.key) {
                 //se movian los numeros tons lo cambie por la letra 
@@ -54,8 +79,8 @@
                     direction = 'right'
                     break;
                 case e.key = 'v':
-                    speed += 2.5;          
-                     break;
+                    speed += 2.5;
+                    break;
             }
 
         });
@@ -63,32 +88,37 @@
         function actualizar() {
             switch (direction) {
                 case 'up':
-                    posY -= speed;
+                    player.y -= speed;
                     break;
                 case 'left':
-                    posX -= speed;
+                    player.x -= speed;
                     break;
                 case 'down':
-                    posY += speed;
+                    player.y += speed;
                     break;
                 case 'right':
-                    posX += speed;
+                    player.x += speed;
                     break;
 
+            }
+
+            if(player.colision(target)){
+                target.x = Math.floor(Math.random() * 500);
+                target.y = Math.floor(Math.random() * 500)
             }
             bordes();
         }
 
         function bordes() {
-            if (posX < -100) {
-                posX = myCanvas.width;
-            } else if (posX > myCanvas.width) {
-                posX = -100;
+            if (player.x < -100) {
+                player.x = myCanvas.width;
+            } else if (player.x > myCanvas.width) {
+                player.x = -100;
             }
-            if (posY < -100) {
-                posY = myCanvas.height;
-            } else if (posY > myCanvas.height) {
-                posY = -100;
+            if (player.y < -100) {
+                player.y = myCanvas.height;
+            } else if (player.y > myCanvas.height) {
+                player.y = -100;
             }
         }
 
@@ -100,8 +130,11 @@
             ctx.fillStyle = "black"
             ctx.fillText("Speed: " + speed, 510, 50);
 
-            ctx.fillStyle = "black";
-            ctx.fillRect(posX, posY, 100, 100);
+            ctx.fillStyle = player.color;
+            ctx.fillRect(player.x, player.y, player.w, player.h);
+
+            ctx.fillStyle = target.color;
+            ctx.fillRect(target.x, target.y, target.w, target.h);
 
             actualizar();
             requestAnimationFrame(pintar);
