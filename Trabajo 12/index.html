@@ -51,6 +51,8 @@
         }
         var player = new Rectangle("red", 50, 50, 100, 100, speed);
         var target = new Rectangle("blue", 20, 20, 50, 50, null);
+        var wall = new Rectangle("green", 20, 450, 190, 380, null);
+
 
 
 
@@ -106,6 +108,23 @@
                 target.x = Math.floor(Math.random() * 500);
                 target.y = Math.floor(Math.random() * 500)
             }
+            if(player.colision(wall)){
+                switch (direction) {
+                case 'up':
+                    player.y += speed;
+                    break;
+                case 'left':
+                    player.x += speed;
+                    break;
+                case 'down':
+                    player.y -= speed;
+                    break;
+                case 'right':
+                    player.x -= speed;
+                    break;
+
+            }
+            }
             bordes();
         }
 
@@ -135,6 +154,9 @@
 
             ctx.fillStyle = target.color;
             ctx.fillRect(target.x, target.y, target.w, target.h);
+
+            ctx.fillStyle = wall.color;
+            ctx.fillRect(wall.x, wall.y, wall.w, wall.h);
 
             actualizar();
             requestAnimationFrame(pintar);
