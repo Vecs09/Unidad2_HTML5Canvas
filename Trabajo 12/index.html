@@ -25,6 +25,9 @@
         var forma = 1;
         var walls = [];
 
+        var score = 0;
+        var pause = false;
+
         // let strokeColor = getRandomColor();
         //  let fillColor = getRandomColor();
         //  let isDrawing = false;
@@ -56,15 +59,8 @@
 
         walls.push(new Rectangle("green", 20, 450, 190, 380, null));
         walls.push(new Rectangle("green", 20, 450, 120, 200, null));
-
         walls.push(new Rectangle("green", 200, 20, 70, 400, null));
-
         walls.push(new Rectangle("green", 200, 20, 500, 400, null));
-
-
-
-
-
 
         var posX = 100;
         var posY = 100;
@@ -75,7 +71,7 @@
         ctx.fillRect(player.x, player.y, player.h, player.w);
 
         addEventListener("keypress", (e) => {
-
+            console.log("gola")
             switch (e.key) {
                 //se movian los numeros tons lo cambie por la letra 
                 case e.key = 'w':
@@ -90,34 +86,39 @@
                 case e.key = 'd':
                     direction = 'right'
                     break;
-                case e.key = 'v':
-                    speed += 2.5;
+                case e.key = 'p':
+                    pause = !pause;
+                    console.log(pause);
                     break;
             }
-
         });
 
         function actualizar() {
-            switch (direction) {
-                case 'up':
-                    player.y -= speed;
-                    break;
-                case 'left':
-                    player.x -= speed;
-                    break;
-                case 'down':
-                    player.y += speed;
-                    break;
-                case 'right':
-                    player.x += speed;
-                    break;
+            if (!pause) {
+                switch (direction) {
+                    case 'up':
+                        player.y -= speed;
+                        break;
+                    case 'left':
+                        player.x -= speed;
+                        break;
+                    case 'down':
+                        player.y += speed;
+                        break;
+                    case 'right':
+                        player.x += speed;
+                        break;
 
+                }
             }
+
+
 
             if (player.colision(target)) {
                 target.x = Math.floor(Math.random() * 500);
                 target.y = Math.floor(Math.random() * 500)
-
+                score += 10;
+                speed += .5;
             }
 
             walls.forEach(function (wall, i, array) {
@@ -140,9 +141,9 @@
                 }
             });
 
-
             bordes();
         }
+
 
         function bordes() {
             if (player.x < -100) {
@@ -163,7 +164,7 @@
 
             ctx.font = "50px Georgia";
             ctx.fillStyle = "black"
-            ctx.fillText("Speed: " + speed, 510, 50);
+            ctx.fillText("Score: " + score, 510, 50);
 
             ctx.fillStyle = player.color;
             ctx.fillRect(player.x, player.y, player.w, player.h);
@@ -177,7 +178,14 @@
 
             });
 
+            if (pause) {
+                ctx.fillStyle = "rgba(172, 172, 172 , 0.5)";
+                ctx.fillRect(0, 0, 800, 650);
 
+                ctx.font = "50px Georgia";
+                ctx.fillStyle = "black"
+                ctx.fillText("P A U S E ", 250, 250);
+            }
             actualizar();
             requestAnimationFrame(pintar);
         }
