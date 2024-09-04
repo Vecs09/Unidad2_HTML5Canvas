@@ -23,6 +23,8 @@
         const myCanvas = document.getElementById("myCanvas");
         const ctx = myCanvas.getContext("2d");
         var forma = 1;
+        var walls = [];
+
         // let strokeColor = getRandomColor();
         //  let fillColor = getRandomColor();
         //  let isDrawing = false;
@@ -46,12 +48,20 @@
                     return true;
                 }
                 return false;
-                
+
             }
         }
         var player = new Rectangle("red", 50, 50, 100, 100, speed);
         var target = new Rectangle("blue", 20, 20, 50, 50, null);
-        var wall = new Rectangle("green", 20, 450, 190, 380, null);
+
+        walls.push(new Rectangle("green", 20, 450, 190, 380, null));
+        walls.push(new Rectangle("green", 20, 450, 120, 200, null));
+
+        walls.push(new Rectangle("green", 200, 20, 70, 400, null));
+
+        walls.push(new Rectangle("green", 200, 20, 500, 400, null));
+
+
 
 
 
@@ -104,27 +114,33 @@
 
             }
 
-            if(player.colision(target)){
+            if (player.colision(target)) {
                 target.x = Math.floor(Math.random() * 500);
                 target.y = Math.floor(Math.random() * 500)
-            }
-            if(player.colision(wall)){
-                switch (direction) {
-                case 'up':
-                    player.y += speed;
-                    break;
-                case 'left':
-                    player.x += speed;
-                    break;
-                case 'down':
-                    player.y -= speed;
-                    break;
-                case 'right':
-                    player.x -= speed;
-                    break;
 
             }
-            }
+
+            walls.forEach(function (wall, i, array) {
+                if (player.colision(wall)) {
+                    switch (direction) {
+                        case 'up':
+                            player.y += speed;
+                            break;
+                        case 'left':
+                            player.x += speed;
+                            break;
+                        case 'down':
+                            player.y -= speed;
+                            break;
+                        case 'right':
+                            player.x -= speed;
+                            break;
+
+                    }
+                }
+            });
+
+
             bordes();
         }
 
@@ -155,8 +171,12 @@
             ctx.fillStyle = target.color;
             ctx.fillRect(target.x, target.y, target.w, target.h);
 
-            ctx.fillStyle = wall.color;
-            ctx.fillRect(wall.x, wall.y, wall.w, wall.h);
+            walls.forEach(function (wall, i, array) {
+                ctx.fillStyle = wall.color;
+                ctx.fillRect(wall.x, wall.y, wall.w, wall.h);
+
+            });
+
 
             actualizar();
             requestAnimationFrame(pintar);
