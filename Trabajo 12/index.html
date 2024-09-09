@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trabajo 12</title>
+    <title>Trabajo 34</title>
     <style>
         body {
             background-color: grey;
@@ -31,11 +31,25 @@
         // let strokeColor = getRandomColor();
         //  let fillColor = getRandomColor();
         //  let isDrawing = false;
+        const img = new Image();
+        img.src = "pinguino.png";
+        img.onload = function () {
+        };
+
+        const img2 = new Image();
+        img2.src = "ice-cube.png";
+        img2.onload = function () {
+        };
+
+        const img3 = new Image();
+        img3.src = "texture.png";
+        img3.onload = function () {
+        };
 
 
         class Rectangle {
-            constructor(color, h, w, x, y, speed) {
-                this.color = color;
+            constructor(img, h, w, x, y, speed) {
+                this.img = img;
                 this.h = h;
                 this.w = w;
                 this.x = x;
@@ -54,13 +68,13 @@
 
             }
         }
-        var player = new Rectangle("red", 50, 50, 100, 100, speed);
-        var target = new Rectangle("blue", 20, 20, 50, 50, null);
+        var player = new Rectangle(img, 50, 50, 100, 100, speed);
+        var target = new Rectangle(img2, 20, 20, 50, 50, null);
 
-        walls.push(new Rectangle("green", 20, 450, 190, 380, null));
-        walls.push(new Rectangle("green", 20, 450, 120, 200, null));
-        walls.push(new Rectangle("green", 200, 20, 70, 400, null));
-        walls.push(new Rectangle("green", 200, 20, 500, 400, null));
+        walls.push(new Rectangle(img3, 20, 450, 190, 380, null));
+        walls.push(new Rectangle(img3, 20, 450, 120, 200, null));
+        walls.push(new Rectangle(img3, 200, 20, 70, 400, null));
+        walls.push(new Rectangle(img3, 200, 20, 500, 400, null));
 
         var posX = 100;
         var posY = 100;
@@ -70,10 +84,27 @@
         ctx.fillStyle = player.color;
         ctx.fillRect(player.x, player.y, player.h, player.w);
 
+
+        const audio = new Audio("cancioncita.mp3");
+        let isAudioPlaying = false;
+        let hasStartedPlaying = false; 
+
+
+        function startAudio() {
+            if (!hasStartedPlaying) {
+                audio.play().then(() => {
+                    isAudioPlaying = true;
+                    hasStartedPlaying = true;
+                }).catch((error) => {
+                    console.error('Error al reproducir el audio: ', error);
+                });
+            }
+        }
         addEventListener("keypress", (e) => {
             console.log("gola")
+            startAudio();
+
             switch (e.key) {
-                //se movian los numeros tons lo cambie por la letra 
                 case e.key = 'w':
                     direction = 'up'
                     break;
@@ -89,6 +120,21 @@
                 case e.key = 'p':
                     pause = !pause;
                     console.log(pause);
+                    if (pause) {
+                   
+                        if (isAudioPlaying) {
+                            audio.pause();
+                            isAudioPlaying = false;
+                        }
+                    } else {
+                 
+                        audio.play().then(() => {
+                            isAudioPlaying = true;
+                        }).catch((error) => {
+                            console.error('Error al reproducir el audio: ', error);
+                        });
+                    }
+
                     break;
             }
         });
@@ -166,15 +212,12 @@
             ctx.fillStyle = "black"
             ctx.fillText("Score: " + score, 510, 50);
 
-            ctx.fillStyle = player.color;
-            ctx.fillRect(player.x, player.y, player.w, player.h);
+            ctx.drawImage(player.img, player.x, player.y, player.h, player.w);
 
-            ctx.fillStyle = target.color;
-            ctx.fillRect(target.x, target.y, target.w, target.h);
+            ctx.drawImage(target.img, target.x, target.y, target.h, target.w);
 
             walls.forEach(function (wall, i, array) {
-                ctx.fillStyle = wall.color;
-                ctx.fillRect(wall.x, wall.y, wall.w, wall.h);
+                ctx.drawImage(wall.img, wall.x, wall.y, wall.w, wall.h);
 
             });
 
